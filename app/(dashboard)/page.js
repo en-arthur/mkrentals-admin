@@ -78,15 +78,15 @@ export default async function DashboardPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Page Header */}
-      <div className="pb-4">
+      <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
-        <p className="text-gray-500 mt-2">Monitor your rental business at a glance</p>
+        <p className="text-gray-500 mt-1">Monitor your rental business at a glance</p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat) => (
           <Link
             key={stat.title}
@@ -108,22 +108,22 @@ export default async function DashboardPage() {
       </div>
 
       {/* Recent Quotes */}
-      <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-        <div className="px-6 py-5 border-b border-gray-200">
+      <div className="bg-white rounded-lg shadow-sm border">
+        <div className="p-6 border-b">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-gray-900">Recent Quotes</h2>
             <Link 
               href="/quotes"
-              className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+              className="text-sm text-primary hover:text-primary/80 font-medium"
             >
               View all →
             </Link>
           </div>
         </div>
 
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y">
           {stats.recentQuotes.length === 0 ? (
-            <div className="px-6 py-12 text-center">
+            <div className="p-12 text-center">
               <AlertCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-500">No quotes yet</p>
               <p className="text-sm text-gray-400 mt-1">
@@ -172,36 +172,33 @@ export default async function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div>
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          <Link
-            href="/products/new"
-            className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md hover:border-primary/50 transition-all group"
-          >
-            <Package className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold text-gray-900">Add Product</h3>
-            <p className="text-sm text-gray-500 mt-1">Add a new product to your inventory</p>
-          </Link>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Link
+          href="/products/new"
+          className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow"
+        >
+          <Package className="h-8 w-8 text-primary mb-3" />
+          <h3 className="font-semibold text-gray-900">Add Product</h3>
+          <p className="text-sm text-gray-500 mt-1">Add a new product to your inventory</p>
+        </Link>
 
-          <Link
-            href="/quotes?status=pending"
-            className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md hover:border-primary/50 transition-all group"
-          >
-            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold text-gray-900">Pending Quotes</h3>
-            <p className="text-sm text-gray-500 mt-1">Review and respond to quote requests</p>
-          </Link>
+        <Link
+          href="/quotes?status=pending"
+          className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow"
+        >
+          <Clock className="h-8 w-8 text-primary mb-3" />
+          <h3 className="font-semibold text-gray-900">Pending Quotes</h3>
+          <p className="text-sm text-gray-500 mt-1">Review and respond to quote requests</p>
+        </Link>
 
-          <Link
-            href="/categories"
-            className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md hover:border-primary/50 transition-all group"
-          >
-            <TrendingUp className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold text-gray-900">Manage Categories</h3>
-            <p className="text-sm text-gray-500 mt-1">Organize your product categories</p>
-          </Link>
-        </div>
+        <Link
+          href="/categories"
+          className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow"
+        >
+          <TrendingUp className="h-8 w-8 text-primary mb-3" />
+          <h3 className="font-semibold text-gray-900">Manage Categories</h3>
+          <p className="text-sm text-gray-500 mt-1">Organize your product categories</p>
+        </Link>
       </div>
     </div>
   );

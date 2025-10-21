@@ -8,9 +8,9 @@ export async function middleware(request) {
   
   console.log('Middleware executing for path:', pathname);
   
-  // Allow access to login page, setup endpoints, and auth APIs
-  if (pathname === '/login' || pathname.startsWith('/api/setup') || pathname.startsWith('/api/auth/')) {
-    console.log('✅ Allowing access to login page, setup endpoint, or auth API:', pathname);
+  // Allow access to login page
+  if (pathname === '/login') {
+    console.log('Allowing access to login page');
     return NextResponse.next();
   }
   
@@ -46,13 +46,11 @@ export const config = {
     /*
      * Match all request paths except:
      * - /login (login page)
-     * - /api/setup (setup endpoints)
-     * - /api/auth (auth APIs - login, logout, me)
-     * - /api (other API routes that don't need auth)
+     * - /api (all API routes)
      * - /_next (Next.js internals)
      * - /favicon.ico, /robots.txt (static files)
      * - Static assets (images, videos, fonts, etc.)
      */
-    '/((?!login|api/setup|api/auth|_next/static|_next/image|favicon.ico|robots.txt|.*\\.(?:jpg|jpeg|png|gif|svg|webp|ico|mp4|webm|woff|woff2|ttf|eot)).*)',
+    '/((?!login|api|_next/static|_next/image|favicon.ico|robots.txt|.*\\.(?:jpg|jpeg|png|gif|svg|webp|ico|mp4|webm|woff|woff2|ttf|eot)).*)',
   ],
 };
