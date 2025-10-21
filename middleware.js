@@ -8,9 +8,9 @@ export async function middleware(request) {
   
   console.log('Middleware executing for path:', pathname);
   
-  // Allow access to login page
-  if (pathname === '/login') {
-    console.log('Allowing access to login page');
+  // Allow access to login page and API routes
+  if (pathname === '/login' || pathname.startsWith('/api/')) {
+    console.log('Allowing access to:', pathname);
     return NextResponse.next();
   }
   
