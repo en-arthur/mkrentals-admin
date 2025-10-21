@@ -9,6 +9,10 @@ import {
 import Link from 'next/link';
 import { getAllProducts, getAllQuotes, getQuoteStats } from '@/lib/supabase/queries';
 
+// Disable caching to always show fresh data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function getStats() {
   try {
     const [products, quotes, quoteStats] = await Promise.all([

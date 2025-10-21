@@ -3,6 +3,10 @@ import { Plus, FolderOpen } from 'lucide-react';
 import { getAllCategories } from '@/lib/supabase/queries';
 import CategoriesTable from '@/components/categories/categories-table';
 
+// Disable caching to always show fresh data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function CategoriesPage() {
   const categories = await getAllCategories(true);
 

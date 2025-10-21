@@ -1,6 +1,10 @@
 import { getAllQuotes } from '@/lib/supabase/queries';
 import QuotesTable from '@/components/quotes/quotes-table';
 
+// Disable caching to always show fresh data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function QuotesPage() {
   const quotes = await getAllQuotes();
 

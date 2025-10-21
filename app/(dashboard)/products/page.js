@@ -3,6 +3,10 @@ import { Plus, Search, Package } from 'lucide-react';
 import { getAllProducts } from '@/lib/supabase/queries';
 import ProductsTable from '@/components/products/products-table';
 
+// Disable caching to always show fresh data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function ProductsPage() {
   const products = await getAllProducts(true);
 
