@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { requireAuth } from '@/lib/auth/session';
 import { getAllProducts, createProduct } from '@/lib/supabase/queries';
 
@@ -24,6 +25,10 @@ export async function POST(request) {
     const data = await request.json();
     
     const product = await createProduct(data);
+    
+    // Revalidate products page and dashboard
+    revalidatePath('/products');
+    revalidatePath('/');
     
     return NextResponse.json(product);
   } catch (error) {

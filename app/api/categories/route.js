@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { requireAuth } from '@/lib/auth/session';
 import { getAllCategories, createCategory } from '@/lib/supabase/queries';
 
@@ -24,6 +25,11 @@ export async function POST(request) {
     const data = await request.json();
     
     const category = await createCategory(data);
+    
+    // Revalidate categories page and products page
+    revalidatePath('/categories');
+    revalidatePath('/products');
+    revalidatePath('/');
     
     return NextResponse.json(category);
   } catch (error) {

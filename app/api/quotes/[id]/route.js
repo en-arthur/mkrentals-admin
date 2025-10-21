@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { requireAuth } from '@/lib/auth/session';
 import { getQuoteById, updateQuoteStatus } from '@/lib/supabase/queries';
 
@@ -31,6 +32,10 @@ export async function PATCH(request, { params }) {
       admin_notes,
       admin.full_name || admin.username
     );
+    
+    // Revalidate quotes page and dashboard
+    revalidatePath('/quotes');
+    revalidatePath('/');
     
     return NextResponse.json(quote);
   } catch (error) {

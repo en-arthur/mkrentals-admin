@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { requireAuth } from '@/lib/auth/session';
 import { toggleProductAvailability } from '@/lib/supabase/queries';
 
@@ -8,6 +9,10 @@ export async function PATCH(request, { params }) {
     const { id } = await params;
     
     const product = await toggleProductAvailability(id);
+    
+    // Revalidate products page and dashboard
+    revalidatePath('/products');
+    revalidatePath('/');
     
     return NextResponse.json(product);
   } catch (error) {

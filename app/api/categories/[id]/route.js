@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { requireAuth } from '@/lib/auth/session';
 import { getCategoryById, updateCategory, deleteCategory } from '@/lib/supabase/queries';
 
@@ -27,6 +28,11 @@ export async function PATCH(request, { params }) {
     
     const category = await updateCategory(id, data);
     
+    // Revalidate categories page, products page, and dashboard
+    revalidatePath('/categories');
+    revalidatePath('/products');
+    revalidatePath('/');
+    
     return NextResponse.json(category);
   } catch (error) {
     console.error('Error updating category:', error);
@@ -43,6 +49,10 @@ export async function DELETE(request, { params }) {
     const { id } = await params;
     
     await deleteCategory(id);
+    
+    // Revalidate categories page and dashboard
+    revalidatePath('/categories');
+    revalidatePath('/');
     
     return NextResponse.json({ success: true });
   } catch (error) {

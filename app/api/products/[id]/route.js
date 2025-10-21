@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { requireAuth } from '@/lib/auth/session';
 import { getProductById, updateProduct, deleteProduct } from '@/lib/supabase/queries';
 
@@ -27,6 +28,10 @@ export async function PATCH(request, { params }) {
     
     const product = await updateProduct(id, data);
     
+    // Revalidate products page and dashboard
+    revalidatePath('/products');
+    revalidatePath('/');
+    
     return NextResponse.json(product);
   } catch (error) {
     console.error('Error updating product:', error);
@@ -43,6 +48,10 @@ export async function DELETE(request, { params }) {
     const { id } = await params;
     
     await deleteProduct(id);
+    
+    // Revalidate products page and dashboard to reflect deletion
+    revalidatePath('/products');
+    revalidatePath('/');
     
     return NextResponse.json({ success: true });
   } catch (error) {
