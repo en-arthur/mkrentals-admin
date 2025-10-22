@@ -5,7 +5,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, 
   Package, 
-  FileText, 
   FolderOpen, 
   LogOut,
   Menu,
@@ -16,7 +15,6 @@ import { useState } from 'react';
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'Products', href: '/products', icon: Package },
-  { name: 'Quotes', href: '/quotes', icon: FileText },
   { name: 'Categories', href: '/categories', icon: FolderOpen },
 ];
 
